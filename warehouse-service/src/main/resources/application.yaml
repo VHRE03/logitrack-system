@@ -18,6 +18,17 @@ spring:
     console:
       enabled: true
 
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui/index.html
+    disable-swagger-default-url: true
+  packages-to-scan: com.vhre.warehouse_service
+  model-converters:
+    deprecating-converter:
+      enabled: false
+
 eureka:
   client:
     service-url:

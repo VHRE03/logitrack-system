@@ -5,7 +5,7 @@ plugins {
 	id 'io.swagger.core.v3.swagger-gradle-plugin' version '2.2.52'
 }
 
-group = 'com.example'
+group = 'com.vhre'
 version = '0.0.1-SNAPSHOT'
 
 java {
@@ -23,24 +23,37 @@ ext {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-h2console'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-webmvc'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // H2 Database
+    implementation 'org.springframework.boot:spring-boot-h2console'
     runtimeOnly 'com.h2database:h2'
+
+    // Swagger / OpenAPI
+    implementation 'io.swagger.core.v3:swagger-annotations:2.2.52'
+    // Motor visual de Swagger para Spring Boot 3
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.9'
+
+    // MapStruct (Librería principal)
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+
+    // Lombok
+    compileOnly("org.projectlombok:lombok:1.18.46")
+
+    // Anotación Processors (¡El orden es importante aquí!)
+    annotationProcessor("org.projectlombok:lombok:1.18.46")
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
+    // Testing
     testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
-    compileOnly("org.projectlombok:lombok:1.18.46")
-    annotationProcessor("org.projectlombok:lombok:1.18.46")
-
     testCompileOnly("org.projectlombok:lombok:1.18.46")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.46")
-
-	implementation 'io.swagger.core.v3:swagger-annotations:2.2.52'
-
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 dependencyManagement {
